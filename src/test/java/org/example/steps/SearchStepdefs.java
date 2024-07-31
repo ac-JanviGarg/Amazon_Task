@@ -1,16 +1,13 @@
 package org.example.steps;
 
-import io.cucumber.java.BeforeAll;
-import io.cucumber.java.AfterAll;
+import io.cucumber.java.*;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import junit.framework.Assert;
-import io.cucumber.java.PendingException;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Collections;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -21,7 +18,7 @@ import org.example.pages.Product;
 import static java.util.Collections.sort;
 
 
-public class SearchSteps{
+public class SearchStepdefs {
 
     SearchAmazonPage searchAmazonPage;
     WebDriver driver;
@@ -31,18 +28,19 @@ public class SearchSteps{
 //    driver = new ChromeDriver();
 
 
-    @BeforeAll
-    public void setUp() {
+    @Before()
+    public void setUpClass() {
 //        WebDriverManager.chromedriver(),setUp();
+        WebDriverManager.chromedriver().browserVersion("126.0.6478.57").setup();
 
-        WebDriverManager.chromedriver().setup();
+//        WebDriverManager.chromedriver().setup();
 
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         searchAmazonPage = new SearchAmazonPage( driver);
     }
 
-    @AfterAll
+    @After()
     public void afterAll() {
        driver.quit();
     }
@@ -102,7 +100,7 @@ public class SearchSteps{
 
 //    }
 
-    @When("I search for {string} on Amazon")
+    @Given("I search for {string} on Amazon")
     public void iSearchForOnAmazon(String arg0) {
 
         driver.get("https://www.amazon.in");
