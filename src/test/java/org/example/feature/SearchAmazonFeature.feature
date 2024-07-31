@@ -2,10 +2,8 @@
 Feature: Search Amazon
 
   Scenario Outline: Search and sort the results by price
-    When I search for "<product>" on Amazon
+    Given I search for "<product>" on Amazon
     Then the results should be stored and displayed sorted by their price
-
-    @tests
     Examples:
       | product |
       | Samsung |
